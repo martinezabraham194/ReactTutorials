@@ -7,6 +7,19 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
 
+  constructor (props) {
+    super(props);
+    console.log('[App].js Inside Constructor', props)
+  }
+
+  componentWillMount() {
+    console.log('[App.js] Inside componentWillMount()')
+  }
+
+  componentDidMount() {
+    console.log('[App.js] Inside componentDidMount()')
+  }
+
   state = {
     persons: [
       {id: '1', name: "Abraham", age: 24},
