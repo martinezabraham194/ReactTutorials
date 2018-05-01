@@ -4,8 +4,22 @@ import classes from './App.css';
 import Person from '../components/Persons/Person/Person';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import WithClass from '../hoc/WithClass';
 
 class App extends Component {
+
+  constructor (props) {
+    super(props);
+    console.log('[App].js Inside Constructor', props)
+  }
+
+  componentWillMount() {
+    console.log('[App.js] Inside componentWillMount()')
+  }
+
+  componentDidMount() {
+    console.log('[App.js] Inside componentDidMount()')
+  }
 
   state = {
     persons: [
@@ -55,14 +69,14 @@ class App extends Component {
     }
 
     return (
-        <div className={classes.App}>
+        <WithClass classes={classes.App}>
           <Cockpit 
           appTitle={this.props.title}
           showPersons = {this.state.showPersons}
           persons={this.state.persons}
           clicked={this.togglePersonsHandler}/>
           {persons}
-        </div>
+          </WithClass>
     );
   }
 }
