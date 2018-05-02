@@ -7,6 +7,8 @@ import Cockpit from '../components/Cockpit/Cockpit';
 import WithClass from '../hoc/withClass';
 import Auxs from '../hoc/Auxs';
 
+export const AuthContext = React.createContext(false);
+
 class App extends Component {
 
   constructor (props) {
@@ -29,7 +31,8 @@ class App extends Component {
       {id: '3', name: "John Doe", age: 21}
     ],
     showPersons: false,
-    toggleClicked: 0
+    toggleClicked: 0,
+    authenticated: false
   }
 
   nameChangeHandler = (event, id) => {
@@ -64,6 +67,10 @@ class App extends Component {
     this.setState({persons: persons});
   }
 
+  loginHandler = () => {
+    this.setState({authenticated: true});
+  }
+
   render() {
 
     let persons = null;
@@ -82,8 +89,11 @@ class App extends Component {
           appTitle={this.props.title}
           showPersons = {this.state.showPersons}
           persons={this.state.persons}
+          login={this.loginHandler}
           clicked={this.togglePersonsHandler}/>
+          <AuthContext.Provider value={this.state.authenticated}>
           {persons}
+          </AuthContext.Provider>
         </Auxs>  
     );
   }
