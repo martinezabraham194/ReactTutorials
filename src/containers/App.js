@@ -28,7 +28,8 @@ class App extends Component {
       {id: '2', name: "Jessica", age: 31},
       {id: '3', name: "John Doe", age: 21}
     ],
-    showPersons: false
+    showPersons: false,
+    toggleClicked: 0
   }
 
   nameChangeHandler = (event, id) => {
@@ -46,9 +47,15 @@ class App extends Component {
     this.setState({persons: persons});
   }
 
+  //Use prev state when you need to update the state based off data from the prev state
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
-    this.setState({showPersons: !doesShow})
+    this.setState((prevState, props) => {
+      return {
+        showPersons: !doesShow, 
+        toggleClicked: prevState.toggleClicked + 1
+      }
+    });
   }
 
   deletePersonHandler = (personIndex) => {
