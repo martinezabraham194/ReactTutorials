@@ -4,7 +4,8 @@ import classes from './App.css';
 import Person from '../components/Persons/Person/Person';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
-import WithClass from '../hoc/WithClass';
+import WithClass from '../hoc/withClass';
+import Auxs from '../hoc/Auxs';
 
 class App extends Component {
 
@@ -69,16 +70,16 @@ class App extends Component {
     }
 
     return (
-        <WithClass classes={classes.App}>
+        <Auxs>
           <Cockpit 
           appTitle={this.props.title}
           showPersons = {this.state.showPersons}
           persons={this.state.persons}
           clicked={this.togglePersonsHandler}/>
           {persons}
-          </WithClass>
+        </Auxs>  
     );
   }
 }
 
-export default App;
+export default WithClass(App, classes.App);
